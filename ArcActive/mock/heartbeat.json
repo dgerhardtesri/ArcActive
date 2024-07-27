@@ -1,0 +1,201 @@
+{
+  "HealthKitHeartbeatSampleKey": "de4cb807-bcda-53ed-ab7a-8c91d31ab5bb",
+  "Device": {
+    "FDAIdentifier": "",
+    "FirmwareVersion": "",
+    "HardwareVersion": "Watch6,2",
+    "LocalIdentifier": "",
+    "Manufacturer": "Apple Inc.",
+    "Model": "Watch",
+    "Name": "Apple Watch",
+    "SoftwareVersion": "8.6"
+  },
+  "SubSamples": [
+    {
+      "PrecededByGap": true,
+      "TimeSinceSeriesStart": 0.1875
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 0.90813499689102173
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 1.6148432493209839
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 2.3138160705566406
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 3.0290284156799316
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 3.7401368618011475
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 4.4389252662658691
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 5.16614294052124
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 5.9092016220092773
+    },
+    {
+      "PrecededByGap": true,
+      "TimeSinceSeriesStart": 8.96875
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 9.7187509536743164
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 10.468750953674316
+    },
+    {
+      "PrecededByGap": true,
+      "TimeSinceSeriesStart": 11.921875
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 12.623162269592285
+    },
+    {
+      "PrecededByGap": true,
+      "TimeSinceSeriesStart": 17.3125
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 17.958740234375
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 18.614402770996094
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 19.293989181518555
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 20.013359069824219
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 20.716007232666016
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 21.415485382080078
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 22.126419067382813
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 22.829624176025391
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 23.547115325927734
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 24.254932403564453
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 24.942197799682617
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 25.641992568969727
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 26.349542617797852
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 27.05267333984375
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 27.747762680053711
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 28.434392929077148
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 29.146957397460938
+    },
+    {
+      "PrecededByGap": true,
+      "TimeSinceSeriesStart": 48.75
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 49.466648101806641
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 50.185184478759766
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 50.879440307617188
+    },
+    {
+      "PrecededByGap": true,
+      "TimeSinceSeriesStart": 52.90625
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 53.585159301757813
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 54.286392211914063
+    },
+    {
+      "PrecededByGap": true,
+      "TimeSinceSeriesStart": 57.296875
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 58.064239501953125
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 58.8125
+    },
+    {
+      "PrecededByGap": false,
+      "TimeSinceSeriesStart": 59.51641845703125
+    }
+  ],
+  "Source": {
+    "Name": "Apple Watch",
+    "Identifier": "com.apple.health.55F7DF98-0F21-43C2-BD63-B67FA04D9364",
+    "Version": "8.6",
+    "OperatingSystemVersion": "8.6.0",
+    "ProductType": "Watch6,2"
+  },
+  "Date": "2022-05-31T11:56:29-05:00",
+  "InsertedDate": "2022-07-14T18:52:48Z",
+  "ParticipantIdentifier": "26d61a47-f001-ed11-bc5e-001c42d08f49",
+  "StartDate": "2022-05-31T11:55:29-05:00",
+  "Metadata": {
+    "HKAlgorithmVersion": "2"
+  }
+}
