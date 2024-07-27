@@ -6,8 +6,19 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import {fetchWeatherData} from '@/views/apis/GetWeather';
 import WeatherAirQualityComponent from "@/components/WeatherAirQualityComponent";
+import {isGoodToStart} from "@/utils/tools";
 
 export default function HomeScreen() {
+  const onClickStart = async () => {
+    let result: boolean = await isGoodToStart();
+    if (result) {
+      console.log("Good to start");
+    } else {
+      console.error("Not good to start");
+      window.alert("DONT RUN");
+    }
+  };
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -17,11 +28,9 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
     }>
-
-      <WeatherAirQualityComponent></WeatherAirQualityComponent>
       <Button
-        onPress={()=>fetchWeatherData(34.060659, -117.191143)}
-        title="Learn More"
+        onPress={onClickStart}
+        title="Start"
         color="#841584"
         accessibilityLabel="Learn more about this purple button"
       />
