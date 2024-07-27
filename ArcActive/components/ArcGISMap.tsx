@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { fetchHazardsData } from '@/views/apis/GetHazards';
 
 const ArcGISMap = () => {
     const getHTML = () => {
@@ -143,6 +144,36 @@ const ArcGISMap = () => {
           // Update the route and execute it if 2 or more stops are input
           routeParams.stops.features.push(stop);
           if (routeParams.stops.features.length >= 2) {
+            // Initialize minLat with the latitude of the first stop
+            let minLat = routeParams.stops.features[0].geometry.latitude;
+            let minLon = routeParams.stops.features[0].geometry.longitude;
+            let maxLat = minLat;
+            let maxLon = minLon;
+
+            // Iterate through the remaining stops and update minLat if a lower latitude is found
+            for (let i = 1; i < routeParams.stops.features.length; i++) {
+              const lat = routeParams.stops.features[i].geometry.latitude;
+              const lon = routeParams.stops.features[i].geometry.longitude;
+              if (lat < minLat) {
+                minLat = lat;
+              }
+              if (lat > maxLat) {
+                maxLat = lat;
+              }
+              if (lon < minLon) {
+                minLon = lon;
+              }
+              if (lon > maxLon) {
+                maxLon = lon;
+              }
+            }
+
+            const hazardsData = fetchHazardsData(minLon, minLat, maxLon, maxLat);
+            if (hazardsData) {
+              // Process the hazards data and perform rerouting logic
+              console.log(hazardsData);
+            }
+
             route
               .solve(routeUrl, routeParams)
               .then(onRouteUpdated)

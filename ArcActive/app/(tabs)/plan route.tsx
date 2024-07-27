@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import RoutePlanner from '../../components/RoutePlanner';
+import ArcGISMap from '@/components/ArcGISMap';
 
 export default function PlanRouteScreen() {
   return (
@@ -11,6 +12,7 @@ export default function PlanRouteScreen() {
         <ThemedText type="title">Plan Route</ThemedText>
       </ThemedView>
       <RoutePlanner />
+      <ArcGISMap />
       <ThemedText>This app includes example code to help you get started.</ThemedText>
     </ScrollView>
   );
