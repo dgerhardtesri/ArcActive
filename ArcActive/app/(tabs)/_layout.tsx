@@ -4,6 +4,7 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -24,20 +25,24 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="map"
+        name="plan route"
         options={{
-          title: 'Map',
+          title: 'Plan Route',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'map' : 'map-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="start activity"
         options={{
-          title: 'Explore',
+          title: 'Start Activity',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <MaterialCommunityIcons
+              name={focused ? 'run-fast' : 'run'}
+              color={color}
+              size={24}
+              />
           ),
         }}
       />
