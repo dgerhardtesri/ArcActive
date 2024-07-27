@@ -9,6 +9,7 @@ import { ThemedView } from '@/components/ThemedView';
 import MapView from "@/components/ArcGISMap";
 import ArcGISMap from "@/components/ArcGISMap";
 import RoutePlanner from '../../components/RoutePlanner';
+import ArcGISMap from '@/components/ArcGISMap';
 
 export default function PlanRouteScreen() {
   return (
@@ -18,9 +19,8 @@ export default function PlanRouteScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Plan Route</ThemedText>
       </ThemedView>
-      <MapView></MapView>
-      <ArcGISMap></ArcGISMap>
-        <RoutePlanner></RoutePlanner>
+      <RoutePlanner />
+      <ArcGISMap />
       <ThemedText>This app includes example code to help you get started.</ThemedText>
       <Collapsible title="File-based routing">
         <ThemedText>
