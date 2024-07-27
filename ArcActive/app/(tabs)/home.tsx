@@ -5,6 +5,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import {fetchWeatherData} from '@/views/apis/GetWeather';
+import WeatherAirQualityComponent from "@/components/WeatherAirQualityComponent";
 
 export default function HomeScreen() {
   return (
@@ -16,6 +17,8 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
     }>
+
+      <WeatherAirQualityComponent></WeatherAirQualityComponent>
       <Button
         onPress={()=>fetchWeatherData(34.060659, -117.191143)}
         title="Learn More"
