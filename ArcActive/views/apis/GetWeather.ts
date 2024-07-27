@@ -59,6 +59,7 @@ export async function fetchWeatherData(latitude: number, longitude: number) {
         const response = await axios.get(forecastGridUrl);
         const data = response.data;
         console.log(data)
+
         if (data && data.properties && data.properties.periods) {
             forecastData = data.properties.periods;
         } else {
