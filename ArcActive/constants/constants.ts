@@ -1,0 +1,1 @@
+export const AIRNOW_KEY: string = "8EDB288C-5604-4887-B397-A7F7519635EC"

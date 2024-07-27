@@ -15,7 +15,9 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Allow Expo experiences to use your location."
+        "NSLocationWhenInUseUsageDescription": "Allow Expo experiences to use your location.",
+        "NSLocationAlwaysUsageDescription": "Allow Expo experiences to use your location.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow Expo experiences to use your location."
       }
     },
     "android": {
