@@ -3,12 +3,12 @@ import { ScrollView, View, Text } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
-export default function MapScreen() {
+export default function StartActivityScreen() {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <ThemedView style={styles.container}>
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Map Page</ThemedText>
+          <ThemedText type="title">Start Activity</ThemedText>
         </ThemedView>
         <ThemedView style={styles.stepContainer}>
           <ThemedText type="subtitle">Step 1: Try it</ThemedText>
