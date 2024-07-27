@@ -2,6 +2,9 @@ import { Image, StyleSheet, Platform } from 'react-native';
 import { ScrollView, View, Text } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import Geolocation from '@react-native-community/geolocation';
+
+Geolocation.getCurrentPosition(info => console.log(info));
 
 export default function StartActivityScreen() {
   return (

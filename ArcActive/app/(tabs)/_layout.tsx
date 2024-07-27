@@ -38,11 +38,7 @@ export default function TabLayout() {
         options={{
           title: 'Start Activity',
           tabBarIcon: ({ color, focused }) => (
-            <MaterialCommunityIcons
-              name={focused ? 'run-fast' : 'run'}
-              color={color}
-              size={24}
-              />
+            <MaterialCommunityIcons name={focused ? 'run-fast' : 'run'} color={color} size={24} />
           ),
         }}
       />

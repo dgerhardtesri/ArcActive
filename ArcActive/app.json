@@ -15,8 +15,11 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Allow Expo experiences to use your location."
-      }
+        "NSLocationWhenInUseUsageDescription": "We need your location to show the map correctly.",
+        "NSLocationAlwaysUsageDescription": "We need your location to show the map correctly.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "We need your location to show the map correctly."
+      },
+      "bundleIdentifier": "ios"
     },
     "android": {
       "adaptiveIcon": {
@@ -34,6 +37,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "dd12decf-579d-4333-b3bf-357f1744be1c"
+      }
     }
   }
 }
