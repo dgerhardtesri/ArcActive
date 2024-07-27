@@ -1,9 +1,10 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import {Image, StyleSheet, Platform, Button} from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import {fetchWeatherData} from '@/views/apis/GetWeather';
 
 export default function HomeScreen() {
   return (
@@ -14,7 +15,13 @@ export default function HomeScreen() {
           source={require('@/assets/images/partial-react-logo.png')}
           style={styles.reactLogo}
         />
-      }>
+    }>
+      <Button
+        onPress={()=>fetchWeatherData(34.060659, -117.191143)}
+        title="Learn More"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+      />
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">ArcActive</ThemedText>
         <HelloWave />
