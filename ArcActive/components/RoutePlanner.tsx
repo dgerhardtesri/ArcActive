@@ -41,14 +41,30 @@ const RoutePlanner = () => {
               "esri/rest/route",
               "esri/rest/support/RouteParameters",
               "esri/rest/support/FeatureSet",
-              "esri/Graphic"
-            ], function(route, RouteParameters, FeatureSet, Graphic) {
+              "esri/Graphic",
+              "esri/geometry/Point"
+            ], function(route, RouteParameters, FeatureSet, Graphic, Point) {
+              const startGraphic = new Graphic({
+                geometry: new Point(startPoint),
+                symbol: {
+                  type: "simple-marker",
+                  color: "blue",
+                  size: "8px"
+                }
+              });
+
+              const endGraphic = new Graphic({
+                geometry: new Point(endPoint),
+                symbol: {
+                  type: "simple-marker",
+                  color: "red",
+                  size: "8px"
+                }
+              });
+
               const routeParams = new RouteParameters({
                 stops: new FeatureSet({
-                  features: [
-                    new Graphic({ geometry: startPoint }),
-                    new Graphic({ geometry: endPoint })
-                  ]
+                  features: [startGraphic, endGraphic]
                 }),
                 returnDirections: true,
                 outSpatialReference: { wkid: 3857 } // Ensure the spatial reference is set
@@ -56,6 +72,7 @@ const RoutePlanner = () => {
 
               route.solve(routeUrl, routeParams)
                 .then(function(data) {
+                  console.log("Route data:", data);
                   const filteredRoutes = filterRoutes(data.routeResults, elevation, distance);
                   if (filteredRoutes.length > 0) {
                     filteredRoutes.forEach(function(result) {
@@ -107,7 +124,7 @@ const RoutePlanner = () => {
 
             const lon2 = lon1 + Math.atan2(Math.sin(bearing * (Math.PI / 180)) * Math.sin(distanceInKm / earthRadius) * Math.cos(lat1),
               Math.cos(distanceInKm / earthRadius) - Math.sin(lat1) * Math.sin(lat2));
-            return startPoint;
+
             return {
               latitude: lat2 * (180 / Math.PI), // Convert latitude back to degrees
               longitude: lon2 * (180 / Math.PI) // Convert longitude back to degrees
@@ -115,8 +132,8 @@ const RoutePlanner = () => {
           }
 
           function filterRoutes(routeResults, elevation, distance) {
-            const elevationTolerance = 1500; // Adjust as needed
-            const distanceTolerance = 4.5; // Adjust as needed
+            const elevationTolerance = 150; // Adjust as needed
+            const distanceTolerance = 2; // Adjust as needed
 
             return routeResults.filter(result => {
               const totalDistance = result.route.attributes.Total_Kilometers;
@@ -140,8 +157,9 @@ const RoutePlanner = () => {
             "esri/config",
             "esri/Map",
             "esri/views/MapView",
-            "esri/Graphic"
-          ], function(esriConfig, Map, MapView, Graphic) {
+            "esri/Graphic",
+            "esri/geometry/Point"
+          ], function(esriConfig, Map, MapView, Graphic, Point) {
             esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurJcLXYZuG6gISdSjmr4A9lFnIxQvjf1bPw-RmJe6CfAfDspajmIkh0hd5Oq1NjUP9AfdQbFsS9M47E3BK_0bpw80Fh6HSeV7x6cU1LcnShO-z_P4fQNlnKheT8TIX_90bSieJEQabmjoG0-QJOOw58PbJPWn1xCsTK78qdnWrpa1jYrgs-KZuni1UxGO-FV-aDOawuI51ih4aHzlNpPbhVsRY7Qx985-Y0hNPwwd8TEaAT1_C6DNZpzx";
 
             const map = new Map({
@@ -158,22 +176,22 @@ const RoutePlanner = () => {
             view.on("click", function(event) {
               if (!startPoint) {
                 addGraphic("start", event.mapPoint);
-                startPoint = event.mapPoint;
+                startPoint = { latitude: event.mapPoint.latitude, longitude: event.mapPoint.longitude };
               } else {
                 view.graphics.removeAll();
                 addGraphic("start", event.mapPoint);
-                startPoint = event.mapPoint;
+                startPoint = { latitude: event.mapPoint.latitude, longitude: event.mapPoint.longitude };
               }
             });
 
             function addGraphic(type, point) {
               const graphic = new Graphic({
+                geometry: new Point(point),
                 symbol: {
                   type: "simple-marker",
                   color: (type === "start") ? "blue" : "red",
                   size: "8px"
-                },
-                geometry: point
+                }
               });
               view.graphics.add(graphic);
             }
@@ -202,6 +220,7 @@ const RoutePlanner = () => {
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
+         
           style={styles.input}
           placeholder="Elevation"
           value={elevation}
