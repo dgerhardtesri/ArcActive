@@ -7,7 +7,6 @@ interface LoginScreenProps {
 }
 
 export default function LoginScreen({ setLoggedIn }: LoginScreenProps) {
-  const [rememberMe, setRememberMe] = useState(false);
 
   return (
     <View style={styles.container}>
