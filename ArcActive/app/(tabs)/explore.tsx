@@ -6,8 +6,8 @@ import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import MapView from "@/components/MapView";
-import ArcGISMap from "@/components/MapView";
+import MapView from "@/components/ArcGISMap";
+import ArcGISMap from "@/components/ArcGISMap";
 
 export default function TabTwoScreen() {
   return (
