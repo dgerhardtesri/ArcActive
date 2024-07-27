@@ -9,6 +9,7 @@ import { ThemedView } from '@/components/ThemedView';
 import MapView from "@/components/ArcGISMap";
 import ArcGISMap from "@/components/ArcGISMap";
 import RoutePlanner from '../../components/RoutePlanner';
+import WeatherAirQualityComponent from "@/components/WeatherAirQualityComponent";
 
 export default function PlanRouteScreen() {
   return (
@@ -18,6 +19,7 @@ export default function PlanRouteScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Plan Route</ThemedText>
       </ThemedView>
+      <WeatherAirQualityComponent></WeatherAirQualityComponent>
         {/*<MapView></MapView>
         <ArcGISMap></ArcGISMap>*/}
         <RoutePlanner></RoutePlanner>
