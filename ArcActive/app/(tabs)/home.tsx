@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Platform, Button, TextInput } from 'react-native';
+import { Image, StyleSheet, Platform, Button, TextInput, View, Alert } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -14,6 +15,36 @@ export default function HomeScreen() {
   const [weight, setWeight] = useState('');
   const [activityLevel, setActivityLevel] = useState('');
   const [runningVolume, setRunningVolume] = useState('');
+
+  const handleNextPress = async () => {
+    const healthData = {
+      age,
+      height,
+      weight,
+      activityLevel,
+      runningVolume,
+    };
+
+    // Save each value in SecureStore
+    try {
+      window.localStorage.setItem('age', age);
+      window.localStorage.setItem('height', height);
+      window.localStorage.setItem('weight', weight);
+      window.localStorage.setItem('activityLevel', activityLevel);
+      window.localStorage.setItem('runningVolume', runningVolume);
+
+      // await SecureStore.setItemAsync('age', age);
+      // await SecureStore.setItemAsync('height', height);
+      // await SecureStore.setItemAsync('weight', weight);
+      // await SecureStore.setItemAsync('activityLevel', activityLevel);
+      // await SecureStore.setItemAsync('runningVolume', runningVolume);
+      console.log('Health data saved successfully');
+    } catch (error) {
+      console.error('Error saving health data', error);
+    }
+
+    Alert.alert("Health Data", JSON.stringify(healthData, null, 2));
+  };
 
   return (
       <ParallaxScrollView
@@ -97,6 +128,11 @@ export default function HomeScreen() {
               value={runningVolume}
               onChangeText={setRunningVolume}
               keyboardType="numeric"
+          />
+          <Button
+              onPress={handleNextPress}
+              title="Next"
+              color="#841584"
           />
         </ThemedView>
       </ParallaxScrollView>
