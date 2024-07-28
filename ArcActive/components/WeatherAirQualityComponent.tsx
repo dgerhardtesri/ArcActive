@@ -6,8 +6,6 @@ import { fetchWeatherData } from '../views/apis/GetWeather';
 import {fetchLocation} from "@/views/apis/GetLocation";
 
 const WeatherAirQualityComponent: React.FC = () => {
-    const [latitude, setLatitude] = useState<number>(0);
-    const [longitude, setLongitude] = useState<number>(0);
     const [airQuality, setAirQuality] = useState<number | null>(null);
     const [weather, setWeather] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -16,8 +14,6 @@ const WeatherAirQualityComponent: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             const {latitude, longitude} = await fetchLocation();
-            setLatitude(latitude);
-            setLongitude(longitude);
             const aqi = await fetchAirQualityData(latitude, longitude);
             setAirQuality(aqi);
             const weatherData = await fetchWeatherData(latitude, longitude);
