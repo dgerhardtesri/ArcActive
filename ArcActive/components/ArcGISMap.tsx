@@ -1,12 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { fetchHazardsData } from '@/views/apis/GetHazards';
 import { loadModules } from 'esri-loader';
+import {isGoodToStart} from "@/utils/tools";
 
 const ArcGISMap: React.FC = () => {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
   const mapRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
+    const checkIsGoodToStart = async () => {
+      const isGood = await isGoodToStart();
+      console.log('isGood', isGood);
+      if (!isGood) {
+        window.alert("Running condition changed, please go home!")
+      }
+    }
+    const intervalId = setInterval(checkIsGoodToStart, 10000);
+
     let view: __esri.SceneView;
 
     loadModules([
@@ -171,6 +183,7 @@ const ArcGISMap: React.FC = () => {
     });
 
     return () => {
+      clearInterval(intervalId);
       if (view) {
         view.destroy();
       }
