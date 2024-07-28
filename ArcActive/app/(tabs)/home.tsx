@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Platform, Button} from 'react-native';
+import {Image, StyleSheet, Platform, Button, Text} from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -7,15 +7,21 @@ import { ThemedView } from '@/components/ThemedView';
 import {fetchWeatherData} from '@/views/apis/GetWeather';
 import WeatherAirQualityComponent from "@/components/WeatherAirQualityComponent";
 import {isGoodToStart} from "@/utils/tools";
+import {useState} from "react";
 
 export default function HomeScreen() {
+  const [showWarning, setShowWarning] = useState(false);
+
   const onClickStart = async () => {
     let result: boolean = await isGoodToStart();
     if (result) {
       console.log("Good to start");
     } else {
       console.error("Not good to start");
-      window.alert("DONT RUN");
+      setShowWarning(true);
+      setTimeout(() => {
+        setShowWarning(false);
+      }, 5000);
     }
   };
 
@@ -28,12 +34,14 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
     }>
+      <WeatherAirQualityComponent/>
       <Button
         onPress={onClickStart}
         title="Start"
         color="#841584"
         accessibilityLabel="Learn more about this purple button"
       />
+      {showWarning && <Text style={styles.warningText}>Don't run</Text>}
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">ArcActive</ThemedText>
         <HelloWave />
@@ -85,5 +93,24 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f0f0f0',
+  },
+  warningText: {
+    marginTop: 20,
+    color: '#d9534f',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 10,
+    borderWidth: 2,
+    borderColor: '#d9534f',
+    borderRadius: 10,
+    backgroundColor: '#f9e0e0',
   },
 });
