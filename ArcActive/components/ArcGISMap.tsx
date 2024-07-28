@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import { fetchHazardsData } from '@/views/apis/GetHazards';
 import { loadModules } from 'esri-loader';
+import {isGoodToStart} from "@/utils/tools";
 
 const ArcGISMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -10,6 +11,15 @@ const ArcGISMap: React.FC = () => {
   const [hazardsLayer, setHazardsLayer] = useState<__esri.GraphicsLayer | undefined>(undefined);
 
   useEffect(() => {
+    const checkIsGoodToStart = async () => {
+      const isGood = await isGoodToStart();
+      console.log('isGood', isGood);
+      if (!isGood) {
+        window.alert("Running condition changed, please go home!")
+      }
+    }
+    const intervalId = setInterval(checkIsGoodToStart, 30000);
+
     let mapView: __esri.MapView | undefined;
     let map: __esri.Map | undefined;
     let routeLayerInstance: __esri.GraphicsLayer | undefined;
@@ -321,6 +331,7 @@ const ArcGISMap: React.FC = () => {
     initializeMap();
 
     return () => {
+      clearInterval(intervalId);
       // Cleanup mapView and map instances when component unmounts
       if (mapView) {
         mapView.destroy();
