@@ -309,13 +309,13 @@ const ArcGISMap: React.FC = () => {
                     " km</p>");
 
                 document.getElementById("distanceDiv")!.innerHTML =
-                  "<p>total distance: " +
+                  "<p>Total Distance: " +
                   Math.round(routeResult.attributes.Total_Kilometers * 1000) / 1000 +
                   " km</p>";
                 document.getElementById("ascDiv")!.innerHTML =
-                  "<p>total ascent: " + Math.round(ascent * 100) / 100 + " m</p>";
+                  "<p>Total Ascent: " + Math.round(ascent * 100) / 100 + " m</p>";
                 document.getElementById("descDiv")!.innerHTML =
-                  "<p>total descent: " + Math.round(descent * 100) / 100 + " m</p>";
+                  "<p>Total Descent: " + Math.round(descent * 100) / 100 + " m</p>";
               },
               (error: any) => {
                 console.error('Error querying elevation:', error);
@@ -344,9 +344,42 @@ const ArcGISMap: React.FC = () => {
 
   return (
       <View style={styles.container}>
-        <div id="distanceDiv"><p>total distance: 0 km</p></div>
-        <div id="ascDiv"><p>total ascent: 0 m</p></div>
-        <div id="descDiv"><p>total descent: 0 m</p></div>
+        <div
+            id="distanceDiv"
+            style={{
+              backgroundColor: '#f8f9fa',
+              padding: '10px',
+              borderRadius: '5px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              marginBottom: '10px',
+            }}
+        >
+          <p style={{fontSize: '16px', color: '#333', margin: 0}}>Total Distance: 0 km</p>
+        </div>
+        <div
+            id="ascDiv"
+            style={{
+              backgroundColor: '#f8f9fa',
+              padding: '10px',
+              borderRadius: '5px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              marginBottom: '10px',
+            }}
+        >
+          <p style={{fontSize: '16px', color: '#333', margin: 0}}>Total Ascent: 0 m</p>
+        </div>
+        <div
+            id="descDiv"
+            style={{
+              backgroundColor: '#f8f9fa',
+              padding: '10px',
+              borderRadius: '5px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              marginBottom: '10px',
+            }}
+        >
+          <p style={{fontSize: '16px', color: '#333', margin: 0}}>Total Descent: 0 m</p>
+        </div>
         <div ref={mapRef} style={styles.map}/>
         <div id="paneDiv" className="esri-widget">
           <p>
