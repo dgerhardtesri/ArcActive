@@ -1,16 +1,22 @@
-import {Image, StyleSheet, Platform, Button, Text} from 'react-native';
+import React, { useState } from 'react';
+import { Image, StyleSheet, Platform, Button, TextInput, View, Alert, Text } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import {fetchWeatherData} from '@/views/apis/GetWeather';
+import { fetchWeatherData } from '@/views/apis/GetWeather';
 import WeatherAirQualityComponent from "@/components/WeatherAirQualityComponent";
 import {isGoodToStart} from "@/utils/tools";
-import {useState} from "react";
 
 export default function HomeScreen() {
   const [showWarning, setShowWarning] = useState(false);
+  const [age, setAge] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [activityLevel, setActivityLevel] = useState('');
+  const [runningVolume, setRunningVolume] = useState('');
 
   const onClickStart = async () => {
     let result: boolean = await isGoodToStart();
@@ -23,6 +29,36 @@ export default function HomeScreen() {
         setShowWarning(false);
       }, 5000);
     }
+  };
+
+  const handleNextPress = async () => {
+    const healthData = {
+      age,
+      height,
+      weight,
+      activityLevel,
+      runningVolume,
+    };
+
+    // Save each value in SecureStore
+    try {
+      window.localStorage.setItem('age', age);
+      window.localStorage.setItem('height', height);
+      window.localStorage.setItem('weight', weight);
+      window.localStorage.setItem('activityLevel', activityLevel);
+      window.localStorage.setItem('runningVolume', runningVolume);
+
+      // await SecureStore.setItemAsync('age', age);
+      // await SecureStore.setItemAsync('height', height);
+      // await SecureStore.setItemAsync('weight', weight);
+      // await SecureStore.setItemAsync('activityLevel', activityLevel);
+      // await SecureStore.setItemAsync('runningVolume', runningVolume);
+      console.log('Health data saved successfully');
+    } catch (error) {
+      console.error('Error saving health data', error);
+    }
+
+    Alert.alert("Health Data", JSON.stringify(healthData, null, 2));
   };
 
   return (
@@ -73,6 +109,47 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+      <ThemedView style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Age"
+          value={age}
+          onChangeText={setAge}
+          keyboardType="numeric"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Height"
+          value={height}
+          onChangeText={setHeight}
+          keyboardType="numeric"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Weight"
+          value={weight}
+          onChangeText={setWeight}
+          keyboardType="numeric"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Activity Level"
+          value={activityLevel}
+          onChangeText={setActivityLevel}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Running Volume"
+          value={runningVolume}
+          onChangeText={setRunningVolume}
+          keyboardType="numeric"
+        />
+        <Button
+          onPress={handleNextPress}
+          title="Next"
+          color="#841584"
+        />
+      </ThemedView>
     </ParallaxScrollView>
   );
 }
@@ -112,5 +189,15 @@ const styles = StyleSheet.create({
     borderColor: '#d9534f',
     borderRadius: 10,
     backgroundColor: '#f9e0e0',
+  },
+  inputContainer: {
+    padding: 16,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingLeft: 8,
   },
 });

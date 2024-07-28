@@ -18,9 +18,8 @@ export default function PlanRouteScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Plan Route</ThemedText>
       </ThemedView>
-      <MapView></MapView>
-      <ArcGISMap></ArcGISMap>
-        <RoutePlanner></RoutePlanner>
+      <RoutePlanner />
+      <ArcGISMap />
       <ThemedText>This app includes example code to help you get started.</ThemedText>
       <Collapsible title="File-based routing">
         <ThemedText>

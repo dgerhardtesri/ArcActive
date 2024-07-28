@@ -27,7 +27,6 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
   return loggedIn ? (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
@@ -38,4 +37,5 @@ export default function RootLayout() {
   ) : (
     <LoginScreen setLoggedIn={setLoggedIn} />
   );
+
 }
