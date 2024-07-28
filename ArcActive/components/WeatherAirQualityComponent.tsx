@@ -30,12 +30,11 @@ const WeatherAirQualityComponent: React.FC = () => {
             {errorMsg && <Text style={styles.error}>{errorMsg}</Text>}
 
             {!loading && airQuality !== null && (
-                <Text style={styles.title}>Air Quality Index: {airQuality}</Text>
+              <Text style={styles.title}>AQI: {airQuality}</Text>
             )}
 
             {!loading && weather.length > 0 && (
                 <View style={styles.weatherContainer}>
-                    <Text style={styles.title}>Weather Forecast:</Text>
                     {weather.slice(0, 5).map((forecast, index) => (
                         <View key={index} style={styles.forecastContainer}>
                             <Image source={{ uri: forecast.icon }} style={styles.icon} />
