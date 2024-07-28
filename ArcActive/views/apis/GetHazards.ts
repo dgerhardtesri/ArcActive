@@ -16,10 +16,10 @@ export async function fetchHazardsData(minLon: number, minLat: number, maxLon: n
     }
   } catch (error) {
     console.error('Error fetching hazards data:', error);
-    return null;
+    return [];
   }
 
   console.log('No hazards data found');
 
-  return null;
+  return [];
 }

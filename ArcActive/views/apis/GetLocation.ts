@@ -1,6 +1,6 @@
 import Geolocation from '@react-native-community/geolocation';
 
-export async function fetchLocation() {
+export async function fetchLocation(): Promise<{ latitude: number, longitude: number }> {
   return new Promise((resolve, reject) => {
     Geolocation.getCurrentPosition(
       location => {
