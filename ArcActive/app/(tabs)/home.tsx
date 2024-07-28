@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Platform, Button, TextInput, View, Alert, Text } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -7,6 +8,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { fetchWeatherData } from '@/views/apis/GetWeather';
 import WeatherAirQualityComponent from "@/components/WeatherAirQualityComponent";
+import HydrationReminder from "@/components/HydrationReminder";
 import {isGoodToStart} from "@/utils/tools";
 
 export default function HomeScreen() {
@@ -81,6 +83,7 @@ export default function HomeScreen() {
         <ThemedText type="title">ArcActive</ThemedText>
         <HelloWave />
       </ThemedView>
+        <HydrationReminder/>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
