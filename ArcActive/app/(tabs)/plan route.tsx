@@ -9,7 +9,6 @@ import { ThemedView } from '@/components/ThemedView';
 import MapView from "@/components/ArcGISMap";
 import ArcGISMap from "@/components/ArcGISMap";
 import RoutePlanner from '../../components/RoutePlanner';
-import ArcGISMap from '@/components/ArcGISMap';
 
 export default function PlanRouteScreen() {
   return (
