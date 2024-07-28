@@ -1,63 +1,34 @@
 // WeatherAirQualityComponent.tsx
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, TextInput, Button, ActivityIndicator, Image } from 'react-native';
 import { fetchAirQualityData } from '../views/apis/GetAirQuality';
 import { fetchWeatherData } from '../views/apis/GetWeather';
+import {fetchLocation} from "@/views/apis/GetLocation";
 
 const WeatherAirQualityComponent: React.FC = () => {
-    const [latitude, setLatitude] = useState<string>('');
-    const [longitude, setLongitude] = useState<string>('');
+    const [latitude, setLatitude] = useState<number>(0);
+    const [longitude, setLongitude] = useState<number>(0);
     const [airQuality, setAirQuality] = useState<number | null>(null);
     const [weather, setWeather] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-    const handleFetchData = async () => {
-        if (!latitude || !longitude) {
-            setErrorMsg('Please enter valid latitude and longitude');
-            return;
-        }
-
-        setLoading(true);
-        setErrorMsg(null);
-
-        try {
-            const lat = parseFloat(latitude);
-            const lon = parseFloat(longitude);
-
-            const airQualityData = await fetchAirQualityData(lat, lon);
-            setAirQuality(airQualityData);
-
-            const weatherData = await fetchWeatherData(lat, lon);
+    useEffect(() => {
+        const fetchData = async () => {
+            const {latitude, longitude} = await fetchLocation();
+            setLatitude(latitude);
+            setLongitude(longitude);
+            const aqi = await fetchAirQualityData(latitude, longitude);
+            setAirQuality(aqi);
+            const weatherData = await fetchWeatherData(latitude, longitude);
             setWeather(weatherData);
-
-        } catch (error) {
-            setErrorMsg('Error fetching data. Please try again.');
-            console.error(error);
-        } finally {
             setLoading(false);
-        }
-    };
+        };
+        fetchData();
+    }, []);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Enter Latitude and Longitude</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Latitude"
-                value={latitude}
-                onChangeText={setLatitude}
-                keyboardType="numeric"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Longitude"
-                value={longitude}
-                onChangeText={setLongitude}
-                keyboardType="numeric"
-            />
-            <Button title="Fetch Data" onPress={handleFetchData} />
-
             {loading && <ActivityIndicator size="large" color="#0000ff" />}
 
             {errorMsg && <Text style={styles.error}>{errorMsg}</Text>}
