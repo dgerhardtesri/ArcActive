@@ -17,7 +17,7 @@ const ArcGISMap: React.FC = () => {
         window.alert("Running condition changed, please go home!")
       }
     }
-    const intervalId = setInterval(checkIsGoodToStart, 10000);
+    const intervalId = setInterval(checkIsGoodToStart, 600000);
 
     let view: __esri.SceneView;
 
