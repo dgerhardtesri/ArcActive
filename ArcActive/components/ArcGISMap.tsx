@@ -287,15 +287,15 @@ const ArcGISMap: React.FC = () => {
   return (
     <View style={styles.container}>
       <div ref={mapRef} style={styles.map} />
-      <div id="paneDiv" className="esri-widget">
-        <p>
-          Click on the map to add stops. The route along the stops is calculated and elevation values are queried to
-          update the following route statistics:
-        </p>
-        <div id="distanceDiv"><p>total distance: 0 km</p></div>
-        <div id="ascDiv"><p>total ascent: 0 m</p></div>
-        <div id="descDiv"><p>total descent: 0 m</p></div>
-      </div>
+      {/*<div id="paneDiv" className="esri-widget">*/}
+      {/*  <p>*/}
+      {/*    Click on the map to add stops. The route along the stops is calculated and elevation values are queried to*/}
+      {/*    update the following route statistics:*/}
+      {/*  </p>*/}
+      {/*  <div id="distanceDiv"><p>total distance: 0 km</p></div>*/}
+      {/*  <div id="ascDiv"><p>total ascent: 0 m</p></div>*/}
+      {/*  <div id="descDiv"><p>total descent: 0 m</p></div>*/}
+      {/*</div>*/}
     </View>
   );
 };
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: '100%',
-    height: '100%',
+    height: 600,
   },
 });
 
