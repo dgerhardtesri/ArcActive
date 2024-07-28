@@ -52,9 +52,7 @@ export function calculateHydrationInterval(input: HydrationInput): number {
     const totalWaterNeed: number = baseWaterNeed * (1 + heightAdjustment + distanceFactor + elevationFactor) * temperatureFactor;
 
     // Convert the total water need per hour to the recommended interval in minutes
-    const recommendedInterval: number = DRINK_AMOUNT / totalWaterNeed * 60;
-
-    return recommendedInterval;
+    return DRINK_AMOUNT / totalWaterNeed * 60;
 }
 
 // Example usage:
