@@ -34,12 +34,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="start activity"
+        name="profile"
         options={{
-          title: 'Start Activity',
+          title: 'Profile',
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
-              name={focused ? 'run-fast' : 'run'}
+              name={'face-man-profile'}
               color={color}
               size={24}
               />
