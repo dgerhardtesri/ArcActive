@@ -58,6 +58,7 @@ const ArcGISMap: React.FC = () => {
         const routeUrl = "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
 
         map = new Map({
+          ground: "world-elevation",
           basemap: "topo-vector",
           layers: []
         });
@@ -236,7 +237,7 @@ const ArcGISMap: React.FC = () => {
             );
 
             // Query and display elevation data if needed
-            mapView!.ground.queryElevation(geometry).then(
+            map!.ground.queryElevation(geometry).then(
               (result: any) => {
                 let ascent = 0;
                 let descent = 0;
@@ -250,6 +251,10 @@ const ArcGISMap: React.FC = () => {
                     }
                   }
                 });
+
+                console.log("<p>total distance: " +
+                    Math.round(routeResult.attributes.Total_Kilometers * 1000) / 1000 +
+                    " km</p>");
 
                 document.getElementById("distanceDiv")!.innerHTML =
                   "<p>total distance: " +
@@ -285,18 +290,18 @@ const ArcGISMap: React.FC = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <div ref={mapRef} style={styles.map} />
-      <div id="paneDiv" className="esri-widget">
-        <p>
-          Click on the map to add stops. The route along the stops is calculated and elevation values are queried to
-          update the following route statistics:
-        </p>
+      <View style={styles.container}>
         <div id="distanceDiv"><p>total distance: 0 km</p></div>
         <div id="ascDiv"><p>total ascent: 0 m</p></div>
         <div id="descDiv"><p>total descent: 0 m</p></div>
-      </div>
-    </View>
+        <div ref={mapRef} style={styles.map}/>
+        <div id="paneDiv" className="esri-widget">
+          <p>
+            Click on the map to add stops. The route along the stops is calculated and elevation values are queried to
+            update the following route statistics:
+          </p>
+        </div>
+      </View>
   );
 };
 
