@@ -39,6 +39,7 @@ export default function HomeScreen() {
         <ThemedText type="title">ArcActive</ThemedText>
         <HelloWave/>
       </ThemedView>
+      {showWarning && <Text style={styles.warningText}>Running not recommended given the weather!</Text>}
       <HydrationReminder/>
       <WeatherAirQualityComponent/>
       <Button
@@ -47,7 +48,7 @@ export default function HomeScreen() {
         color="#841584"
         accessibilityLabel="Learn more about this purple button"
       />
-      {showWarning && <Text style={styles.warningText}>Running not recommended given the weather!</Text>}
+
     </ParallaxScrollView>
   );
 }
