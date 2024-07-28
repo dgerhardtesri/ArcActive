@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { fetchWeatherData } from '@/views/apis/GetWeather';
 import WeatherAirQualityComponent from "@/components/WeatherAirQualityComponent";
+import HydrationReminder from "@/components/HydrationReminder";
 import {isGoodToStart} from "@/utils/tools";
 
 export default function HomeScreen() {
@@ -38,6 +39,7 @@ export default function HomeScreen() {
         <ThemedText type="title">ArcActive</ThemedText>
         <HelloWave/>
       </ThemedView>
+      <HydrationReminder/>
       <WeatherAirQualityComponent/>
       <Button
         onPress={onClickStart}
