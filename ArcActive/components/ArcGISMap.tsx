@@ -100,6 +100,13 @@ const ArcGISMap: React.FC = () => {
           width: 4
         });
 
+        const hazardSymbol = new SimpleMarkerSymbol({
+          style: "circle",
+          color: new Color([255, 0, 0, 1]),
+          size: 12,
+          outline: outlineSymbol
+        });
+
         const routeParams = new RouteParameters({
           apiKey: "AAPTxy8BH1VEsoebNVZXo8HurJcLXYZuG6gISdSjmr4A9lFnIxQvjf1bPw-RmJe6CfAfDspajmIkh0hd5Oq1NjUP9AfdQbFsS9M47E3BK_0bpw80Fh6HSeV7x6cU1LcnShO-z_P4fQNlnKheT8TIX_90bSieJEQabmjoG0-QJOOw58PbJPWn1xCsTK78qdnWrpa1jYrgs-KZuni1UxGO-FV-aDOawuI51ih4aHzlNpPbhVsRY7Qx985-Y0hNPwwd8TEaAT1_C6DNZpzx",
           stops: new FeatureSet({
@@ -195,7 +202,7 @@ const ArcGISMap: React.FC = () => {
 
                   hazardsLayerInstance?.addMany(hazards);
 
-                  if (window.confirm("Hazards are detected on your route. Would you like to reroute considering these hazards as barriers?")) {
+                  if (hazards.length > 0 && window.confirm("Hazards are detected on your route. Would you like to reroute considering these hazards as barriers?")) {
                     routeParams.polylineBarriers = polylineBarriers;
                     routeParams.pointBarriers = pointBarriers;
                     routeParams.polygonBarriers = polygonBarriers;
@@ -211,6 +218,41 @@ const ArcGISMap: React.FC = () => {
               });
           }
         }
+
+        view!.when(() => {
+          let debounceTimeout: any;
+
+          view!.on("pointer-move", (event: any) => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+              view!.hitTest(event).then((response: any) => {
+                if (response.results.length > 0) {
+                  const graphic = response.results[0].graphic;
+
+                  if (graphic && graphic.layer === hazardsLayerInstance) {
+                    const content = `
+                      <div>
+                        <h2>${graphic.getAttribute("hazardType")}</h2>
+                        <p>${graphic.getAttribute("description")}</p>
+                      </div>
+                    `;
+
+                    view!.popup.open({
+                      title: "Hazard Information",
+                      content: content,
+                      location: event.mapPoint
+                    });
+                  } else {
+                    view!.popup.close();
+                  }
+                } else {
+                  view!.popup.close();
+                }
+              });
+            }, 100); // Adjust the debounce delay as needed
+          });
+        });
+
 
         function solveRoute(params: __esri.RouteParameters) {
           route.solve(routeUrl, params)
@@ -311,7 +353,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: '100%',
-    height: '100%',
+    height: 600,
   },
 });
 

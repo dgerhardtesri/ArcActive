@@ -19,7 +19,7 @@ export default function PlanRouteScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Plan Route</ThemedText>
       </ThemedView>
-      <RoutePlanner />
+      {/*<RoutePlanner />*/}
       <ArcGISMap />
     </ParallaxScrollView>
   );
