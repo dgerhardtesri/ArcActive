@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Platform, Button, TextInput, View, Alert, Text } from 'react-native';
-import * as SecureStore from 'expo-secure-store';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
