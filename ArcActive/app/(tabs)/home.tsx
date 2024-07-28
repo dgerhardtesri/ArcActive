@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { fetchWeatherData } from '@/views/apis/GetWeather';
 import WeatherAirQualityComponent from "@/components/WeatherAirQualityComponent";
+import HydrationReminder from "@/components/HydrationReminder";
 
 export default function HomeScreen() {
   const [age, setAge] = useState('');
@@ -67,6 +68,7 @@ export default function HomeScreen() {
           <ThemedText type="title">ArcActive</ThemedText>
           <HelloWave />
         </ThemedView>
+        <HydrationReminder />
         <ThemedView style={styles.stepContainer}>
           <ThemedText type="subtitle">Step 1: Try it</ThemedText>
           <ThemedText>
