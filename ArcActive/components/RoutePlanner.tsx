@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { View, StyleSheet, TextInput, Button } from 'react-native';
+import React, {useState, useRef} from 'react';
+import {View, StyleSheet, TextInput, Button} from 'react-native';
 
 const RoutePlanner = () => {
   const [elevation, setElevation] = useState('');
@@ -207,7 +207,7 @@ const RoutePlanner = () => {
   const sendMessageToIframe = () => {
     const iframe = iframeRef.current;
     if (iframe && iframe.contentWindow) {
-      console.log('Sending message to iframe:', { elevation, distance });
+      console.log('Sending message to iframe:', {elevation, distance});
       iframe.contentWindow.postMessage({
         type: 'GET_ROUTE',
         elevation: elevation,

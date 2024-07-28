@@ -43,12 +43,12 @@ export async function fetchWeatherData(latitude: number, longitude: number) {
             forecastGridUrl = data.properties.forecastHourly;
     } catch (error) {
         console.error('Error fetching weather data:', error);
-        return null;
+        return [];
     }
 
     if (!forecastGridUrl) {
         console.error('forecast url not found in the response');
-        return null;
+        return [];
     }
 
     // Call the next API to get the forecast data
@@ -63,16 +63,16 @@ export async function fetchWeatherData(latitude: number, longitude: number) {
             forecastData = data.properties.periods;
         } else {
             console.error('forecastData not found in the response');
-            return null;
+            return [];
         }
     } catch (error) {
         console.error('Error fetching weather data:', error);
-        return null;
+        return [];
     }
 
     if (!forecastData) {
         console.error('forecastData not found in the response');
-        return null;
+        return [];
     }
 
     // comment this out when production
