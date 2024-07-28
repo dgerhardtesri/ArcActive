@@ -29,7 +29,12 @@ const ArcGISMap: React.FC = () => {
           SimpleMarkerSymbol,
           SimpleLineSymbol,
           Polyline,
-          Point
+          Point,
+          Collection,
+          Polygon,
+          PointBarrier,
+          PolygonBarrier,
+          PolylineBarrier,
         ] = await loadModules([
           'esri/Map',
           'esri/views/MapView',
@@ -42,7 +47,12 @@ const ArcGISMap: React.FC = () => {
           'esri/symbols/SimpleMarkerSymbol',
           'esri/symbols/SimpleLineSymbol',
           'esri/geometry/Polyline',
-          'esri/geometry/Point'
+          'esri/geometry/Point',
+          'esri/core/Collection',
+          'esri/geometry/Polygon',
+          "esri/rest/support/PointBarrier",
+          "esri/rest/support/PolygonBarrier",
+          "esri/rest/support/PolylineBarrier"
         ]);
 
         const routeUrl = "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
@@ -118,12 +128,41 @@ const ArcGISMap: React.FC = () => {
             const minLon = Math.min(...stops.map(p => p.longitude));
             const maxLon = Math.max(...stops.map(p => p.longitude));
 
+            let polylineBarriers = new Collection();
+            let pointBarriers = new Collection();
+            let polygonBarriers = new Collection();
+
             fetchHazardsData(minLon, minLat, maxLon, maxLat)
               .then((hazardsData) => {
                 if (hazardsData) {
                   hazardsLayerInstance?.removeAll(); // Clear previous hazards
                   const hazards = hazardsData.map((hazard: any) => {
                     const coordinates = hazard.geometry.coordinates;
+
+                    if (Array.isArray(coordinates[0])) {
+                      const minX = Math.min(...coordinates.map((c: number[]) => c[0]));
+                      const minY = Math.min(...coordinates.map((c: number[]) => c[1]));
+                      const maxX = Math.max(...coordinates.map((c: number[]) => c[0]));
+                      const maxY = Math.max(...coordinates.map((c: number[]) => c[1]));
+
+                      const polygonBarrier = new PolygonBarrier({
+                        geometry: { 
+                          rings: [[
+                          [minX, minY],
+                          [maxX, minY],
+                          [maxX, maxY],
+                          [minX, maxY],
+                          [minX, minY]]]
+                        }
+                      });
+                      polygonBarriers.add(polygonBarrier);
+                    } else {
+                      const pointBarrier = new PointBarrier({
+                        longitude: coordinates[0],
+                        latitude: coordinates[1]
+                      });
+                      pointBarriers.add(pointBarrier);
+                    }
 
                     if (Array.isArray(coordinates[0])) {
                       const polyline = new Polyline({
@@ -156,9 +195,9 @@ const ArcGISMap: React.FC = () => {
                   hazardsLayerInstance?.addMany(hazards);
 
                   if (window.confirm("Hazards are detected on your route. Would you like to reroute considering these hazards as barriers?")) {
-                    routeParams.barriers = new FeatureSet({
-                      features: hazards
-                    });
+                    routeParams.polylineBarriers = polylineBarriers;
+                    routeParams.pointBarriers = pointBarriers;
+                    routeParams.polygonBarriers = polygonBarriers;
                     solveRoute(routeParams);
                   } else {
                     solveRoute(routeParams);
