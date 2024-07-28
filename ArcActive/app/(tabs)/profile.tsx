@@ -5,6 +5,7 @@ import {ThemedView} from '@/components/ThemedView';
 import React, {useState} from "react";
 import {Form, Input, Radio, Selector, Space, Button} from 'antd-mobile'
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import TrainingPlan from "@/components/TrainingPlan";
 
 export default function StartActivityScreen() {
   const [age, setAge] = useState('');
@@ -144,6 +145,8 @@ export default function StartActivityScreen() {
           />
         </Form.Item>
       </Form>
+      {/* Doesn't work :( */}
+      {/*<TrainingPlan/>*/}
     </ParallaxScrollView>
 
   );
