@@ -4,6 +4,7 @@ import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import React, {useState} from "react";
 import {Form, Input, Radio, Selector, Space, Button} from 'antd-mobile'
+import ParallaxScrollView from "@/components/ParallaxScrollView";
 
 export default function StartActivityScreen() {
   const [age, setAge] = useState('');
@@ -79,7 +80,14 @@ export default function StartActivityScreen() {
   };
   console.log('activity', activityLevel, 'weekly volume', weeklyVolume);
   return (
-    <>
+    <ParallaxScrollView
+      headerBackgroundColor={{light: '#A1CEDC', dark: '#1D3D47'}}
+      headerImage={
+        <Image
+          source={require('@/assets/images/partial-react-logo.png')}
+          style={styles.reactLogo}
+        />
+      }>
       <Form
         layout='horizontal'
         footer={
@@ -136,52 +144,8 @@ export default function StartActivityScreen() {
           />
         </Form.Item>
       </Form>
-    </>
-    // <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-    //   <ThemedView style={styles.inputContainer}>
-    //
-    //     {/*<TextInput*/}
-    //     {/*  style={styles.input}*/}
-    //     {/*  placeholder="Age"*/}
-    //     {/*  value={age}*/}
-    //     {/*  onChangeText={setAge}*/}
-    //     {/*  keyboardType="numeric"*/}
-    //     {/*/>*/}
-    //
-    //     {/*<TextInput*/}
-    //     {/*  style={styles.input}*/}
-    //     {/*  placeholder="Height"*/}
-    //     {/*  value={height}*/}
-    //     {/*  onChangeText={setHeight}*/}
-    //     {/*  keyboardType="numeric"*/}
-    //     {/*/>*/}
-    //     {/*<TextInput*/}
-    //     {/*  style={styles.input}*/}
-    //     {/*  placeholder="Weight"*/}
-    //     {/*  value={weight}*/}
-    //     {/*  onChangeText={setWeight}*/}
-    //     {/*  keyboardType="numeric"*/}
-    //     {/*/>*/}
-    //     {/*<TextInput*/}
-    //     {/*  style={styles.input}*/}
-    //     {/*  placeholder="Activity Level"*/}
-    //     {/*  value={activityLevel}*/}
-    //     {/*  onChangeText={setActivityLevel}*/}
-    //     {/*/>*/}
-    //     {/*<TextInput*/}
-    //     {/*  style={styles.input}*/}
-    //     {/*  placeholder="Running Volume"*/}
-    //     {/*  value={runningVolume}*/}
-    //     {/*  onChangeText={setRunningVolume}*/}
-    //     {/*  keyboardType="numeric"*/}
-    //     {/*/>*/}
-    //     <Button
-    //       onPress={handleNextPress}
-    //       title="Next"
-    //       color="#841584"
-    //     />
-    //   </ThemedView>
-    // </ScrollView>
+    </ParallaxScrollView>
+
   );
 }
 

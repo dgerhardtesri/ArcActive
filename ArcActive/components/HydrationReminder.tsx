@@ -31,24 +31,25 @@ const HydrationReminder: React.FC = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Hydration Reminder</Text>
-            <Text style={styles.interval}>Drink water every {hydrationInterval} minutes</Text>
+            <Text style={styles.interval}>Drink water every {Math.floor(hydrationInterval)} minutes</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        paddingTop: 10,
+        paddingBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f0f0f0',
-        padding: 20,
+        padding: 0,
     },
     header: {
         fontSize: 24,
         fontWeight: 'bold',
         color: '#2e86de',
-        marginBottom: 20,
+        marginBottom: 10,
     },
     interval: {
         fontSize: 18,
